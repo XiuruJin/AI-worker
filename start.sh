@@ -4,6 +4,11 @@ username=$1
 password=$2
 horde_url=$3
 api_key=$4
+os=$5
+if [-z $os ];then
+  os="linux"
+fi
+
 if [ -z $1 ] || [ -z $2 ] || [ -z $3 ] || [ -z $4 ];then
     echo "please input all params"
     echo "\$1: username"
@@ -65,7 +70,13 @@ else
     sed -i "s#^hf_username.*#hf_username = \"${username}\"#g" creds.py
     sed -i "s#^hf_password.*#hf_password = \"${password}\"#g" creds.py
 fi
-echo "start update runtime..."
-sh update_runtime.sh
-echo "start worker"
-sh horde_bridge.sh
+
+if [ $os == 'linux' ];then
+    echo "start update runtime..."
+    sh update_runtime.sh
+    echo "start worker"
+    sh horde_bridge.sh
+else:
+    echo "please change windows cmd window and execute start.cmd"
+fi
+
