@@ -18,7 +18,7 @@ host_name=`hostname`
 # sed -i 's/cuda117/${cuda_version}/g' requirements.txt
 
 echo "set bridge data"
-if [[ ! -f bridgeData.py ]];then
+if [ ! -f bridgeData.py ];then
 cat << EOF > bridgeData.py
 horde_url = "${horde_url}"
 worker_name = "${host_name}"
@@ -48,12 +48,12 @@ else
     echo $horde_url
     sed -i  "s#^horde_url.*#horde_url = \"${horde_url}\"#g" bridgeData.py
     sed -i  "s#^api_key.*#api_key = \"${api_key}\"#g" bridgeData.py
-    sed -i "s#^worker_name.*#worker_name = \"${worker_name\"#g" bridgeData.py
+    sed -i "s#^worker_name.*#worker_name = \"${worker_name}\"#g" bridgeData.py
 fi
 
 # creds.py
 echo "set creds..."
-if [[ ! -f creds.py ]];then
+if [ ! -f creds.py ];then
 echo ">>>"
 cat << EOF > creds.py
 hf_username = "${username}"
